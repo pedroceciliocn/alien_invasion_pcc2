@@ -1,4 +1,4 @@
-import sis
+import sys
 
 import pygame
 
