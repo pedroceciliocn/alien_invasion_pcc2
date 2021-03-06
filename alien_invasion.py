@@ -1,5 +1,6 @@
 import sys
 from time import sleep
+from os.path import isfile
 
 import pygame
 
@@ -96,6 +97,13 @@ class AlienInvasion:
 		elif event.key == pygame.K_LEFT:
 			self.ship.moving_left = True
 		elif event.key == pygame.K_q:
+			if isfile('./High_Score.txt'):
+				with open('./High_Score.txt', 'a') as f:
+					f.truncate(0)
+					f.write(str(self.stats.high_score))
+			elif not isfile('./High_Score.txt'):
+				with open('./High_Score.txt', 'w') as f:
+					f.write(str(self.stats.high_score))
 			sys.exit()
 		elif event.key == pygame.K_SPACE:
 			self._fire_bullet()
@@ -197,6 +205,7 @@ class AlienInvasion:
 		screen_rect = self.screen.get_rect()
 		for alien in self.aliens.sprites():
 			if alien.rect.bottom >= screen_rect.bottom:
+				# Add sound
 				self._ship_hit()
 				break
 
@@ -276,6 +285,7 @@ class AlienInvasion:
 			sleep(0.5)
 
 		else:
+			# add gameover sound
 			self.stats.game_active = False
 			pygame.mouse.set_visible(True)
 					

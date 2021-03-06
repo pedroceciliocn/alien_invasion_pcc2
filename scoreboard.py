@@ -31,6 +31,7 @@ class Scoreboard:
 		self.prep_high_score()
 		self.prep_level()
 		self.prep_ships()
+		# add play sound
 
 	def prep_ships(self):
 		"""Show how many ships are left."""
